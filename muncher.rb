@@ -8,6 +8,7 @@ Manufacturers = {
 
 def sucks?(name, specs)
   return true if name.include?("C-Grade")
+  return true if !specs.include?("HDMI")
 
   !specs.include?("1920x1080") and
   !specs.include?("1080p") and
