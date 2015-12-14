@@ -18,6 +18,15 @@ def sucks?(name, specs)
   !specs.include?("350cd/m2")
 end
 
+def cleaned_name(name)
+  name.sub("Monitor", "")
+    .sub("Display", "")
+    .sub("Samsung", "")
+    .sub("HDTV", "")
+    .sub(/(\d{2})in/, '\1"')
+    .lstrip
+end
+
 3.times do |page|
   page_number = page + 1
 
@@ -38,7 +47,7 @@ end
 
     next if sucks?(name, specs)
 
-    puts "#{name} - #{specs}"
+    puts "#{cleaned_name(name)} \t \t #{specs.lstrip}"
   end
 end
 
