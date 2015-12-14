@@ -1,8 +1,21 @@
 Bundler.require
 
+require "net/http"
+
 Manufacturers = {
   samsung: 39
 }
+
+def sucks?(name, specs)
+  return true if name.include?("C-Grade")
+
+  !specs.include?("1920x1080") and
+  !specs.include?("1080p") and
+  !specs.include?("450cd/m2") and
+  !specs.include?("300cd/m2") and
+  !specs.include?("700cd/m2") and
+  !specs.include?("350cd/m2")
+end
 
 3.times do |page|
   page_number = page + 1
@@ -22,6 +35,9 @@ Manufacturers = {
     name = info[0]
     specs = info[1]
 
+    next if sucks?(name, specs)
+
     puts "#{name} - #{specs}"
   end
 end
+
